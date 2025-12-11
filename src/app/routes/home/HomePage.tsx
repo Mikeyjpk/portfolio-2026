@@ -5,7 +5,7 @@ import SkillSection from "./components/SkillSection";
 
 const HomePage = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col">
       <HeroSection />
       <AboutSection />
       <SkillSection />

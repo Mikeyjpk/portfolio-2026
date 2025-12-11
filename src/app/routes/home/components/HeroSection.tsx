@@ -1,6 +1,6 @@
 const HeroSection = () => {
   return (
-    <section className="flex-1 flex flex-col">
+    <section className="flex flex-col h-screen py-4">
       <div className="flex-1 flex items-center">
         <h1 className="text-display flex flex-col">
           <span className="text-accent">Hey,</span> I'M MIKEY

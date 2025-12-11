@@ -1,8 +1,8 @@
 const AboutSection = () => {
   return (
-    <>
-      <div>About Section</div>
-    </>
+    <section className="flex flex-col">
+      <div className="flex-1">testing</div>
+    </section>
   );
 };
 
