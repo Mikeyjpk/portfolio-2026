@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-inter: "Inter", sans-serif;
+  --font-bungee: "Bungee", sans-serif;
+  --color-accent: #da7924;
+}
+
+@layer utilities {
+  .text-display {
+    font-family: var(--font-bungee);
+    font-size: 5rem;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    line-height: 1.1;
+  }
+
+  .text-heading {
+    font-family: var(--font-inter);
+    font-size: 1rem;
+    font-weight: 200;
+    letter-spacing: 1em;
+    line-height: 1.5;
+  }
+
+  .text-title {
+    font-family: var(--font-inter);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    line-height: 1.5;
+  }
+
+  .text-subtitle {
+  }
+
+  .text-body {
+  }
+
+  .text-label {
+  }
+}
