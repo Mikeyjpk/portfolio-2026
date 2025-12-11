@@ -5,6 +5,7 @@ import {
   AnimatedAccordionTrigger,
   AnimatedAccordionContent,
 } from "../../../../components/ui/animated-accordion";
+import Timeline from "./Timeline";
 
 const AboutSection = () => {
   return (
@@ -17,34 +18,109 @@ const AboutSection = () => {
 
       <div className="w-full max-w-lg">
         <AnimatedAccordion type="single">
+          {/* who i am  */}
           <AnimatedAccordionItem value="item-1" accentColor="border-l-accent">
             <AnimatedAccordionTrigger>Who I am</AnimatedAccordionTrigger>
             <AnimatedAccordionContent>
-              <p>
-                I'm Mikey, I love solving problems, learning new things and
-                bringing ideas to life through code.
-              </p>
-              <p>
-                My path hasn't been linear, I've had a mix of experiences that
-                have shaped how I think, create, and collaborate today.
-              </p>
-              <p>
-                I care about building things that feel clean, intuitive, and
-                genuinely helpful. Whether it's an interface, workflow, or tool,
-                I want it to feel thoughtful and enjoyable to use.
-              </p>
+              <div className="flex flex-col gap-3 text-body">
+                <p>
+                  I'm Mikey, I love solving problems, learning new things and
+                  bringing ideas to life through code.
+                </p>
+                <p>
+                  My path hasn't been linear, I've had a mix of experiences that
+                  have shaped how I think, create, and collaborate today.
+                </p>
+                <p>
+                  I care about building things that feel clean, intuitive, and
+                  genuinely helpful. Whether it's an interface, workflow, or
+                  tool, I want it to feel thoughtful and enjoyable to use.
+                </p>
+              </div>
             </AnimatedAccordionContent>
           </AnimatedAccordionItem>
+
+          {/* where i've been */}
           <AnimatedAccordionItem value="item-2" accentColor="border-l-red-500">
             <AnimatedAccordionTrigger>Where I've been</AnimatedAccordionTrigger>
             <AnimatedAccordionContent>
-              <p>Timeline goes here</p>
+              <Timeline />
             </AnimatedAccordionContent>
           </AnimatedAccordionItem>
+
+          {/* what i do */}
           <AnimatedAccordionItem value="item-3" accentColor="border-l-blue-500">
             <AnimatedAccordionTrigger>What I do</AnimatedAccordionTrigger>
             <AnimatedAccordionContent>
-              <p>More accordions go here</p>
+              <div className="space-y-4">
+                <p className="text-body">
+                  I focus on creating digital experiences that are both
+                  functional and delightful.
+                </p>
+
+                {/* Nested Accordion */}
+                <AnimatedAccordion type="multiple" className="mx-4">
+                  <AnimatedAccordionItem
+                    value="frontend"
+                    accentColor="border-l-green-500"
+                  >
+                    <AnimatedAccordionTrigger>
+                      Frontend Development
+                    </AnimatedAccordionTrigger>
+                    <AnimatedAccordionContent>
+                      <p className="text-body">
+                        Building responsive, accessible web applications with
+                        React, TypeScript, and modern CSS frameworks.
+                      </p>
+                    </AnimatedAccordionContent>
+                  </AnimatedAccordionItem>
+
+                  <AnimatedAccordionItem
+                    value="backend"
+                    accentColor="border-l-purple-500"
+                  >
+                    <AnimatedAccordionTrigger>
+                      Backend Development
+                    </AnimatedAccordionTrigger>
+                    <AnimatedAccordionContent>
+                      <p className="text-body">
+                        Creating robust APIs and server-side solutions with
+                        Node.js, databases, and cloud services.
+                      </p>
+                    </AnimatedAccordionContent>
+                  </AnimatedAccordionItem>
+
+                  <AnimatedAccordionItem
+                    value="design"
+                    accentColor="border-l-orange-500"
+                  >
+                    <AnimatedAccordionTrigger>
+                      UI/UX Design
+                    </AnimatedAccordionTrigger>
+                    <AnimatedAccordionContent>
+                      <p className="text-body">
+                        Designing intuitive interfaces and user experiences that
+                        prioritize usability and aesthetics.
+                      </p>
+                    </AnimatedAccordionContent>
+                  </AnimatedAccordionItem>
+
+                  <AnimatedAccordionItem
+                    value="niche"
+                    accentColor="border-l-orange-500"
+                  >
+                    <AnimatedAccordionTrigger>
+                      My niche
+                    </AnimatedAccordionTrigger>
+                    <AnimatedAccordionContent>
+                      <p className="text-body">
+                        Designing intuitive interfaces and user experiences that
+                        prioritize usability and aesthetics.
+                      </p>
+                    </AnimatedAccordionContent>
+                  </AnimatedAccordionItem>
+                </AnimatedAccordion>
+              </div>
             </AnimatedAccordionContent>
           </AnimatedAccordionItem>
         </AnimatedAccordion>
