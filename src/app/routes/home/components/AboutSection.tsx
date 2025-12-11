@@ -49,7 +49,7 @@ const AboutSection = () => {
           </AnimatedAccordionItem>
 
           {/* what i do */}
-          <AnimatedAccordionItem value="item-3" accentColor="border-l-blue-500">
+          <AnimatedAccordionItem value="item-3" accentColor="">
             <AnimatedAccordionTrigger>What I do</AnimatedAccordionTrigger>
             <AnimatedAccordionContent>
               <div className="space-y-4">
@@ -59,11 +59,8 @@ const AboutSection = () => {
                 </p>
 
                 {/* Nested Accordion */}
-                <AnimatedAccordion type="multiple" className="mx-4">
-                  <AnimatedAccordionItem
-                    value="frontend"
-                    accentColor="border-l-green-500"
-                  >
+                <AnimatedAccordion type="multiple" className="mr-3">
+                  <AnimatedAccordionItem value="frontend" accentColor="">
                     <AnimatedAccordionTrigger>
                       Frontend Development
                     </AnimatedAccordionTrigger>
@@ -75,10 +72,7 @@ const AboutSection = () => {
                     </AnimatedAccordionContent>
                   </AnimatedAccordionItem>
 
-                  <AnimatedAccordionItem
-                    value="backend"
-                    accentColor="border-l-purple-500"
-                  >
+                  <AnimatedAccordionItem value="backend" accentColor="">
                     <AnimatedAccordionTrigger>
                       Backend Development
                     </AnimatedAccordionTrigger>
@@ -90,10 +84,7 @@ const AboutSection = () => {
                     </AnimatedAccordionContent>
                   </AnimatedAccordionItem>
 
-                  <AnimatedAccordionItem
-                    value="design"
-                    accentColor="border-l-orange-500"
-                  >
+                  <AnimatedAccordionItem value="design" accentColor="">
                     <AnimatedAccordionTrigger>
                       UI/UX Design
                     </AnimatedAccordionTrigger>
@@ -105,10 +96,7 @@ const AboutSection = () => {
                     </AnimatedAccordionContent>
                   </AnimatedAccordionItem>
 
-                  <AnimatedAccordionItem
-                    value="niche"
-                    accentColor="border-l-orange-500"
-                  >
+                  <AnimatedAccordionItem value="niche" accentColor="">
                     <AnimatedAccordionTrigger>
                       My niche
                     </AnimatedAccordionTrigger>
