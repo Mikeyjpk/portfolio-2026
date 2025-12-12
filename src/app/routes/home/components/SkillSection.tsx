@@ -12,6 +12,7 @@ const skillCardsData = [
     iconAltTag: "react icon",
     title: "Front-end Engineering",
     text: "Building intuitive, performant user interfaces using modern frameworks and component-based architecture. Focused on clean code, responsive layouts, accessibility, and refined user experience",
+    hex: "#333745",
     dotPoints: [
       "React & Next.js application architecture",
       "TypeScript-first development",
@@ -23,7 +24,8 @@ const skillCardsData = [
     icon: stackIcon,
     iconAltTag: "back-end stack icon",
     title: "Full-Stack Development",
-    text: "Building end-to-end web applications across the client, server, and database layers. Focused on scalable architecture, secure data handling, and seamless integration between front-end interfaces and backend services.",
+    text: "Building end-to-end web applications across client, server, and database layers. Focused on scalable architecture, secure data handling, and seamless integration between front and back-end",
+    hex: "#D87454",
     dotPoints: [
       "Prisma ORM, Relational & NoSQL databases",
       "Authentication and session management",
@@ -36,6 +38,7 @@ const skillCardsData = [
     iconAltTag: "DevOps gear icon",
     title: "DevOps & CI/CD",
     text: "Improving delivery speed and reliability through automated build, test, and deployment pipelines. Focused on repeatable workflows and version control best practices.",
+    hex: "#FEDED4",
     dotPoints: [
       "CI/CD pipelines with GitHub Actions & Bitbucket",
       "Automated deployments to Vercel/Netlify",
@@ -216,7 +219,12 @@ const SkillCard = ({ card, stage, onClick }: SkillCardProps) => {
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="flex flex-col w-64 h-84 border-b-4 border-gray-200 p-6 transition-all duration-300 hover:cursor-pointer"
+      style={{
+        borderBottomColor: card.hex,
+        filter: isHovered ? `drop-shadow(0 10px 10px ${card.hex}30)` : "none",
+        transition: "filter 0.3s ease",
+      }}
+      className="flex flex-col w-64 h-84 border-b-4 p-6 transition-all duration-300 hover:cursor-pointer bg-white"
     >
       <div className="h-full">{renderStageContent()}</div>
       <div className="flex w-full items-center justify-center">{getIcon()}</div>
@@ -239,7 +247,7 @@ const SkillSection = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div className="flex flex-col items-center gap-10">
       <div className="text-heading">FOCUS AREAS</div>
       <div className="flex flex-wrap justify-center gap-8 max-w-6xl select-none">
         {skillCardsData.map((card) => (
