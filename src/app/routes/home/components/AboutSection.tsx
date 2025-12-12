@@ -9,14 +9,13 @@ import Timeline from "./Timeline";
 
 const AboutSection = () => {
   return (
-    <section className="flex justify-center items-center gap-10 py-20">
+    <section className="flex justify-center items-center gap-20">
       <img
         src={aboutIcon}
         alt="about icon"
         className="w-50 h-50 sm:block hidden"
       />
-
-      <div className="w-full max-w-lg">
+      <div className="w-full max-w-md">
         <AnimatedAccordion type="single">
           {/* who i am  */}
           <AnimatedAccordionItem value="item-1" accentColor="border-l-accent">

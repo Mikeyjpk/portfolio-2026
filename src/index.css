@@ -53,7 +53,12 @@
     line-height: 1.5;
   }
 
-  .text-label {
+  .contact-us-title {
+    font-family: var(--font-inter);
+    font-size: 1rem;
+    font-weight: 200;
+    letter-spacing: 0.25em;
+    line-height: 1.5;
   }
 
   @media (max-width: 640px) {

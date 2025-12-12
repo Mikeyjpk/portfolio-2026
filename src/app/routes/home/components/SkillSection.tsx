@@ -35,7 +35,7 @@ const skillCardsData = [
     icon: devOpsIcon,
     iconAltTag: "DevOps gear icon",
     title: "DevOps & CI/CD",
-    text: "Improving delivery speed and reliability through automated build, test, and deployment pipelines. Focused on repeatable workflows, version control best practices, and streamlined releases to modern cloud platforms.",
+    text: "Improving delivery speed and reliability through automated build, test, and deployment pipelines. Focused on repeatable workflows and version control best practices.",
     dotPoints: [
       "CI/CD pipelines with GitHub Actions & Bitbucket",
       "Automated deployments to Vercel/Netlify",
@@ -216,7 +216,7 @@ const SkillCard = ({ card, stage, onClick }: SkillCardProps) => {
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="flex flex-col w-64 h-90 border-b-4 border-gray-200 p-6 transition-all duration-300 hover:cursor-pointer"
+      className="flex flex-col w-64 h-84 border-b-4 border-gray-200 p-6 transition-all duration-300 hover:cursor-pointer"
     >
       <div className="h-full">{renderStageContent()}</div>
       <div className="flex w-full items-center justify-center">{getIcon()}</div>
