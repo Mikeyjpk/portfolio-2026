@@ -25,7 +25,7 @@ const skillCardsData = [
     title: "Full-Stack Development",
     text: "Building end-to-end web applications across the client, server, and database layers. Focused on scalable architecture, secure data handling, and seamless integration between front-end interfaces and backend services.",
     dotPoints: [
-      "Prisma ORM with relational and NoSQL databases",
+      "Prisma ORM, Relational & NoSQL databases",
       "Authentication and session management",
       "Serverless functions and backend logic",
     ],
