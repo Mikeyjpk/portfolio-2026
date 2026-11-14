@@ -9,12 +9,16 @@ const HeroSection = () => (
     >
       <Navbar className="rise" style={{ animationDelay: "1.1s" }} />
 
-      {/* Mobile: UFO stacked above the headline, both centred. sm+: side by side. */}
-      <div className="flex min-h-0 flex-auto flex-col items-center justify-center gap-4 text-center sm:flex-row sm:flex-wrap sm:justify-between sm:gap-[clamp(12px,3vh,40px)] sm:text-left">
+      {/*
+        < lg: UFO stacked above the headline, both centred.
+        lg+:  side by side on one row (never wraps). The headline is capped at
+              132px so it always fits beside the UFO inside the 1240px card.
+      */}
+      <div className="flex min-h-0 flex-auto flex-col items-center justify-center gap-4 text-center lg:flex-row lg:justify-between lg:gap-10 lg:text-left">
         <h1
           aria-label="Hey, I'm Mikey"
-          className="m-0 font-pixel leading-[.95] font-bold tracking-[-2px]"
-          style={{ fontSize: "clamp(40px, min(9.5vw, 13vh), 148px)" }}
+          className="m-0 min-w-0 font-pixel leading-[.95] font-bold tracking-[-2px]"
+          style={{ fontSize: "clamp(40px, min(9.5vw, 13vh), 132px)" }}
         >
           <span
             aria-hidden="true"
@@ -25,14 +29,14 @@ const HeroSection = () => (
           </span>
           <span
             aria-hidden="true"
-            className="reveal block pb-1.5"
+            className="reveal block pb-1.5 whitespace-nowrap"
             style={{ animationDelay: ".72s" }}
           >
             I’M MIKEY
           </span>
         </h1>
         <div
-          className="rise order-first w-[clamp(110px,26vh,220px)] sm:order-none"
+          className="rise order-first w-[clamp(110px,26vh,220px)] shrink-0 lg:order-none lg:w-[clamp(110px,min(26vh,16vw),220px)]"
           style={{ animationDelay: "1.15s" }}
         >
           <Ufo />
@@ -49,10 +53,12 @@ const HeroSection = () => (
           </div>
           <div className="eyebrow">Scroll · 2026</div>
         </div>
-        <div className="rise text-right" style={{ animationDelay: "1.35s" }}>
-          <div className="text-base font-bold tracking-[3px]">Web Developer</div>
-          <div className="mt-2 text-xs tracking-[10px] text-muted uppercase">
-            Portfolio
+        <div className="rise sm:ml-auto sm:text-right" style={{ animationDelay: "1.35s" }}>
+          <div className="text-base font-bold tracking-[3px]">
+            Product Engineer
+          </div>
+          <div className="mt-2 text-[11px] tracking-[3px] text-muted uppercase">
+            Full-stack · AI features · TypeScript &amp; React
           </div>
         </div>
       </div>

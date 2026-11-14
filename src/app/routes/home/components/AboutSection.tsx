@@ -5,6 +5,7 @@ import {
   BrowserIcon,
   CursorIcon,
   ServerIcon,
+  SparkIcon,
 } from "@/components/illustrations/service-icons";
 import Timeline from "./Timeline";
 
@@ -85,19 +86,24 @@ const AboutRow = ({
 
 const services = [
   {
+    icon: SparkIcon,
+    title: "AI-Powered Features",
+    text: "Designing and shipping AI features like configurable agents, built into the product so customers get answers, not just data.",
+  },
+  {
     icon: BrowserIcon,
     title: "Frontend Development",
-    text: "Building responsive, accessible web applications with React, TypeScript, and modern CSS frameworks.",
+    text: "Building responsive, accessible interfaces with React, TypeScript, and modern CSS, including data-heavy views like charts and reports.",
   },
   {
     icon: ServerIcon,
     title: "Backend Development",
-    text: "Creating robust APIs and server-side solutions with Node.js, databases, and cloud services.",
+    text: "Creating APIs and server-side logic with Node.js, databases, and cloud services that hold up as features scale.",
   },
   {
     icon: CursorIcon,
-    title: "UI/UX Design",
-    text: "Designing intuitive interfaces and user experiences that prioritize usability and aesthetics.",
+    title: "Product Ownership",
+    text: "Turning problems into clear specs, shipping them, and iterating after release, with a designer’s eye for how it should feel to use.",
   },
 ];
 
@@ -120,17 +126,23 @@ const AboutSection = () => {
           >
             <div className="max-w-[880px] space-y-4 text-[17px] leading-[1.7] text-body">
               <p>
-                I’m Mikey, I love solving problems, learning new things and
-                bringing ideas to life through code.
+                I’m Mikey, a Product Engineer building full-stack, AI-powered
+                features in TypeScript and React.
               </p>
               <p>
-                My path hasn’t been linear, I’ve had a mix of experiences that
-                have shaped how I think, create, and collaborate today.
+                I like owning a feature end to end: turning a problem into a
+                clear spec, shipping it, and scaling it once it’s in customers’
+                hands.
               </p>
               <p>
-                I care about building things that feel clean, intuitive, and
-                genuinely helpful. Whether it’s an interface, workflow, or tool,
-                I want it to feel thoughtful and enjoyable to use.
+                I have 4 years of professional experience. At Truescope I build
+                features for a media intelligence platform, including
+                configurable agents, charts, reports and alerts that turn raw
+                data into something customers can act on.
+              </p>
+              <p>
+                Outside work, I make games, which gives me an excuse to try
+                tools I wouldn’t use at my day job.
               </p>
             </div>
           </AboutRow>
@@ -154,8 +166,8 @@ const AboutSection = () => {
             last
           >
             <p className="mb-6 text-[17px] leading-relaxed text-body">
-              I focus on creating digital experiences that are both functional
-              and delightful.
+              I build product features end to end, from the first spec to
+              scaling them after release.
             </p>
             <ul className="flex flex-col border-b border-line-soft">
               {services.map(({ icon: Icon, title, text }, i) => (

@@ -267,6 +267,19 @@
 .fcard:hover .l1 { transform: translateY(-10px); }
 .fcard:hover .l3 { transform: translateY(10px); }
 
+/* ---------- contact spell ---------- */
+/*
+ * Side by side: the bolt flies across the gap and bursts against the form.
+ * Stacked (form wrapped underneath): no form to hit, so it flies to the
+ * edge of the browser instead (cancelling out the section's side padding).
+ * The 744px threshold is where the two columns (300px + 380px + 64px gap) wrap.
+ */
+.contact-row { container-type: inline-size; }
+.spell { right: -56px; }
+@container (max-width: 743px) {
+  .spell { right: calc(8px - clamp(20px, 5vw, 80px)); }
+}
+
 /* ---------- contact form ---------- */
 .ofield { transition: background 0.3s, border-left-width 0.3s; }
 .ofield::placeholder { color: var(--color-placeholder); }

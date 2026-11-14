@@ -3,7 +3,7 @@ import ContactForm from "./ContactForm";
 
 const ContactSection = () => (
   <section id="contact" className="section bg-white">
-    <div className="mx-auto flex max-w-[1040px] flex-wrap items-center gap-16">
+    <div className="contact-row mx-auto flex max-w-[1040px] flex-wrap items-center gap-16">
       <div className="flex flex-[1_1_300px] flex-col gap-8">
         <h2 className="h-pixel text-center">
           Got an idea?

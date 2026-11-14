@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { CSSProperties, ComponentType } from "react";
 import { cn } from "@/lib/utils";
 import {
+  AgentIcon,
   ArrowCircle,
   AtomIcon,
   CloseCircle,
@@ -23,14 +24,29 @@ interface SkillCard {
 
 const skillCardsData: SkillCard[] = [
   {
+    id: "ai",
+    icon: AgentIcon,
+    titleLines: ["AI &", "Agents"],
+    text: "Building AI-powered features into a production platform, including configurable agents that help customers turn raw media data into something they can act on.",
+    // TODO: once you've picked which AI tools to name, swap one of these for them.
+    dotPoints: [
+      "Configurable agents in production",
+      "From raw data to actionable insight",
+      "Specced, shipped & scaled after release",
+    ],
+    glow: "rgba(229,56,59,.3)",
+    bar: "var(--color-red)",
+    dot: "var(--color-red)",
+  },
+  {
     id: "frontend",
     icon: AtomIcon,
     titleLines: ["Front-end", "Engineering"],
-    text: "Building intuitive, performant user interfaces using modern frameworks and component-based architecture. Focused on clean code, responsive layouts, accessibility, and refined user experience.",
+    text: "Building intuitive, performant interfaces with component-based architecture, from design systems to data-heavy views like charts and reports. Focused on clean code, accessibility, and refined user experience.",
     dotPoints: [
       "React & Next.js application architecture",
       "TypeScript-first development",
-      "Tailwind-based design systems",
+      "Tailwind design systems & data visualisation",
     ],
     glow: "rgba(11,11,11,.22)",
     bar: "var(--color-ink)",
@@ -40,9 +56,9 @@ const skillCardsData: SkillCard[] = [
     id: "fullstack",
     icon: LayersIcon,
     titleLines: ["Full-Stack", "Development"],
-    text: "Building end-to-end web applications across client, server, and database layers. Focused on scalable architecture, secure data handling, and seamless integration between front and back-end.",
+    text: "Owning features across client, server, and database layers. Focused on scalable architecture, secure data handling, and features that keep working as they grow.",
     dotPoints: [
-      "Prisma ORM, Relational & NoSQL databases",
+      "Prisma ORM, relational & NoSQL databases",
       "Authentication and session management",
       "Serverless functions and backend logic",
     ],
@@ -54,7 +70,7 @@ const skillCardsData: SkillCard[] = [
     id: "devops",
     icon: GearCycleIcon,
     titleLines: ["DevOps &", "CI/CD"],
-    text: "Improving delivery speed and reliability through automated build, test, and deployment pipelines. Focused on repeatable workflows and version control best practices.",
+    text: "Keeping delivery fast and reliable with automated build, test, and deployment pipelines, so features can ship often and scale safely after release.",
     dotPoints: [
       "CI/CD pipelines with GitHub Actions & Bitbucket",
       "Automated deployments to Vercel/Netlify",
@@ -155,7 +171,8 @@ const SkillSection = () => {
           <h2 className="h-pixel">Focus areas</h2>
           <div className="eyebrow">Click a card to explore</div>
         </div>
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-5">
+        {/* 1 → 2×2 → 4 across, so four cards never leave an orphan on its own row. */}
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {skillCardsData.map((card) => (
             <FocusCard
               key={card.id}

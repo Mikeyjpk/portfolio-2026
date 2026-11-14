@@ -132,7 +132,7 @@ const Wizard = () => (
     {/* Spell bolt + impact */}
     <div
       aria-hidden="true"
-      className="absolute top-8 right-[-56px] left-[calc(50%+40px)] h-0"
+      className="spell absolute top-8 left-[calc(50%+40px)] h-0"
     >
       <span className="bolt absolute top-[-4px] left-0 h-2 w-[34px] rounded-lg bg-[linear-gradient(90deg,rgba(217,119,43,0),#D9772B_70%,#FFE2C7)]" />
       <span className="impact absolute top-[-8px] right-[-6px] size-4 rounded-full bg-[#FFD3AD]" />
