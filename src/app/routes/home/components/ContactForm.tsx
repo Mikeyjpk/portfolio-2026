@@ -1,7 +1,8 @@
 import { useState } from "react";
-import Toast from "../../../../components/ui/toast";
+import Toast from "@/components/ui/toast";
+import { cn } from "@/lib/utils";
 
-const ContactForm = () => {
+const ContactForm = ({ className }: { className?: string }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [toast, setToast] = useState<{
     isVisible: boolean;
@@ -62,56 +63,58 @@ const ContactForm = () => {
         isVisible={toast.isVisible}
         onClose={closeToast}
       />
-      <form onSubmit={handleSubmit} className="max-w-xs space-y-6 text-sm">
-        {/* Name */}
-        <div className="space-y-1">
-          <div className="flex items-center gap-3">
-            <span className="h-7 w-[3px] bg-neutral-900" />
-            <input
-              type="text"
-              name="name"
-              required
-              className="flex-1 border-none border-b border-transparent focus:border-black focus:outline-none text-sm"
-              placeholder="Name"
-            />
-          </div>
-        </div>
-
-        {/* Email */}
-        <div className="space-y-1">
-          <div className="flex items-center gap-3">
-            <span className="h-7 w-[2px] bg-[#d66234]" />
-            <input
-              type="email"
-              name="email"
-              required
-              placeholder="Email"
-              className="flex-1 border-none border-b border-transparent focus:border-black focus:outline-none text-sm"
-            />
-          </div>
-        </div>
-
-        {/* Message */}
-        <div className="space-y-1">
-          <div className="flex items-start gap-3">
-            <span className="h-20 w-[2px] bg-[#ffd2c3]" />
-            <textarea
-              name="message"
-              required
-              placeholder="Enter message here..."
-              className="flex-1 resize-none border-none border-b border-transparent focus:border-black focus:outline-none text-sm"
-              rows={4}
-            />
-          </div>
-        </div>
-
-        {/* Button */}
+      <form
+        onSubmit={handleSubmit}
+        className={cn("flex flex-col gap-7", className)}
+      >
+        <label className="block">
+          <span className="sr">Name</span>
+          <input
+            className="ofield w-full border-l-4 border-ink bg-transparent px-[18px] py-4 text-[17px]"
+            type="text"
+            name="name"
+            autoComplete="name"
+            required
+            placeholder="Name"
+          />
+        </label>
+        <label className="block">
+          <span className="sr">Email</span>
+          <input
+            className="ofield w-full border-l-[3px] border-orange bg-transparent px-[18px] py-4 text-[17px]"
+            type="email"
+            name="email"
+            autoComplete="email"
+            required
+            placeholder="Email"
+          />
+        </label>
+        <label className="block">
+          <span className="sr">Message</span>
+          <textarea
+            // Resize grip only shows on hover/focus (active keeps it alive mid-drag).
+            className="ofield w-full resize-none hover:resize-y focus:resize-y active:resize-y border-l-2 border-pink bg-transparent px-[18px] py-3 text-[17px]"
+            name="message"
+            rows={5}
+            required
+            placeholder="Enter message here…"
+          />
+        </label>
         <button
           type="submit"
           disabled={isSubmitting}
-          className="mt-4 inline-flex items-center gap-2 bg-black px-6 py-2 text-[11px] uppercase tracking-[0.25em] text-white disabled:opacity-50 disabled:cursor-not-allowed"
+          className="osend mt-3 inline-flex h-12 cursor-pointer items-center gap-3.5 self-start bg-ink px-[30px] text-xs font-semibold tracking-[4px] text-white uppercase disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {isSubmitting ? "Sending..." : "Send"} <span>▸</span>
+          {isSubmitting ? "Sending…" : "Send"}
+          <svg
+            className="tri"
+            width="8"
+            height="10"
+            viewBox="0 0 8 10"
+            aria-hidden="true"
+          >
+            <path d="M0 0 L8 5 L0 10 Z" fill="#FFFFFF" />
+          </svg>
         </button>
       </form>
     </>

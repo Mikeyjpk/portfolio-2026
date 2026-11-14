@@ -1,265 +1,172 @@
 import { useState } from "react";
-import { motion } from "motion/react";
-import reactIcon from "../../../../assets/icons/react-icon.svg";
-import stackIcon from "../../../../assets/icons/stack-icon.svg";
-import devOpsIcon from "../../../../assets/icons/devops-icon.svg";
-import { FaRegArrowAltCircleRight, FaRegTimesCircle } from "react-icons/fa";
+import type { CSSProperties, ComponentType } from "react";
+import { cn } from "@/lib/utils";
+import {
+  ArrowCircle,
+  AtomIcon,
+  CloseCircle,
+  GearCycleIcon,
+  LayersIcon,
+} from "@/components/illustrations/focus-icons";
 
-const skillCardsData = [
+interface SkillCard {
+  id: string;
+  icon: ComponentType;
+  /** Title split over two lines on the card. */
+  titleLines: [string, string];
+  text: string;
+  dotPoints: string[];
+  glow: string;
+  bar: string;
+  dot: string;
+}
+
+const skillCardsData: SkillCard[] = [
   {
-    id: "1",
-    icon: reactIcon,
-    iconAltTag: "react icon",
-    title: "Front-end Engineering",
-    text: "Building intuitive, performant user interfaces using modern frameworks and component-based architecture. Focused on clean code, responsive layouts, accessibility, and refined user experience",
-    hex: "#333745",
+    id: "frontend",
+    icon: AtomIcon,
+    titleLines: ["Front-end", "Engineering"],
+    text: "Building intuitive, performant user interfaces using modern frameworks and component-based architecture. Focused on clean code, responsive layouts, accessibility, and refined user experience.",
     dotPoints: [
       "React & Next.js application architecture",
       "TypeScript-first development",
       "Tailwind-based design systems",
     ],
+    glow: "rgba(11,11,11,.22)",
+    bar: "var(--color-ink)",
+    dot: "var(--color-ink)",
   },
   {
-    id: "2",
-    icon: stackIcon,
-    iconAltTag: "back-end stack icon",
-    title: "Full-Stack Development",
-    text: "Building end-to-end web applications across client, server, and database layers. Focused on scalable architecture, secure data handling, and seamless integration between front and back-end",
-    hex: "#D87454",
+    id: "fullstack",
+    icon: LayersIcon,
+    titleLines: ["Full-Stack", "Development"],
+    text: "Building end-to-end web applications across client, server, and database layers. Focused on scalable architecture, secure data handling, and seamless integration between front and back-end.",
     dotPoints: [
       "Prisma ORM, Relational & NoSQL databases",
       "Authentication and session management",
       "Serverless functions and backend logic",
     ],
+    glow: "rgba(217,119,43,.38)",
+    bar: "var(--color-orange)",
+    dot: "var(--color-orange)",
   },
   {
-    id: "3",
-    icon: devOpsIcon,
-    iconAltTag: "DevOps gear icon",
-    title: "DevOps & CI/CD",
+    id: "devops",
+    icon: GearCycleIcon,
+    titleLines: ["DevOps &", "CI/CD"],
     text: "Improving delivery speed and reliability through automated build, test, and deployment pipelines. Focused on repeatable workflows and version control best practices.",
-    hex: "#FEDED4",
     dotPoints: [
       "CI/CD pipelines with GitHub Actions & Bitbucket",
       "Automated deployments to Vercel/Netlify",
       "Git branching and code review practices",
     ],
+    glow: "rgba(242,184,168,.75)",
+    bar: "var(--color-pink)",
+    dot: "var(--color-red)",
   },
 ];
 
+const STAGE_ACTIONS = ["Show summary", "Show details", "Close"];
+
 interface SkillCardProps {
-  card: (typeof skillCardsData)[0];
+  card: SkillCard;
   stage: number;
   onClick: () => void;
 }
 
-const SkillCard = ({ card, stage, onClick }: SkillCardProps) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const renderStageContent = () => {
-    switch (stage) {
-      // Inital Card Stage
-      case 0:
-        return (
-          <div className="h-full flex flex-col items-center justify-center text-center gap-4">
-            <motion.img
-              key={`${card.id}-stage-2-to-0`}
-              src={card.icon}
-              alt={card.iconAltTag}
-              className="w-20 h-20"
-              initial={{ scale: 0.6, y: 20 }}
-              animate={
-                isHovered
-                  ? {
-                      scale: 1,
-                      y: 0,
-                      rotate: [-2, 2, -2],
-                      x: [-2, 2, -2],
-                      transition: {
-                        scale: {
-                          type: "spring",
-                          stiffness: 300,
-                          damping: 20,
-                          duration: 0.4,
-                        },
-                        y: {
-                          type: "spring",
-                          stiffness: 300,
-                          damping: 20,
-                          duration: 0.4,
-                        },
-                        rotate: {
-                          duration: 2.5,
-                          repeat: Infinity,
-                          repeatType: "reverse",
-                          ease: "easeInOut",
-                        },
-                        x: {
-                          duration: 2.5,
-                          repeat: Infinity,
-                          repeatType: "reverse",
-                          ease: "easeInOut",
-                        },
-                      },
-                    }
-                  : { scale: 1, y: 0 }
-              }
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 20,
-                duration: 0.4,
-              }}
-            />
-            <motion.p
-              key={`${card.id}-title-stage-0`}
-              className="text-title"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{
-                delay: 0.3,
-                duration: 0.8,
-                ease: "easeOut",
-              }}
-            >
-              {card.title}
-            </motion.p>
-          </div>
-        );
-
-      // Details stage: Icon + Title + Text
-      case 1:
-        return (
-          <div className="h-full flex flex-col items-center text-center">
-            <motion.img
-              key={`${card.id}-stage-0-to-1`}
-              src={card.icon}
-              alt={card.iconAltTag}
-              className="w-12 h-12"
-              initial={{ scale: 1.6, y: -30 }}
-              animate={{ scale: 1, y: 0 }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 20,
-                duration: 0.4,
-              }}
-            />
-            <motion.p
-              key={`${card.id}-text-stage-1`}
-              className="text-body pt-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: 0.2,
-                duration: 0.6,
-                ease: "easeOut",
-              }}
-            >
-              {card.text}
-            </motion.p>
-          </div>
-        );
-
-      // Features stage: Icon + Title + Dot Points
-      case 2:
-        return (
-          <div className="h-full flex flex-col items-center text-center">
-            <img src={card.icon} alt={card.iconAltTag} className="w-12 h-12" />
-            <motion.ul
-              key={`${card.id}-dotpoints-stage-2`}
-              className="text-body space-y-1 pt-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: 0.2,
-                duration: 0.6,
-                ease: "easeOut",
-              }}
-            >
-              {card.dotPoints.map((point, index) => (
-                <li key={index} className="py-1">
-                  <span className="mr-1">•</span>
-                  <span>{point}</span>
-                </li>
-              ))}
-            </motion.ul>
-          </div>
-        );
-
-      default:
-        return null;
-    }
-  };
-
-  const getIcon = () => {
-    return (
-      <motion.div
-        animate={{
-          rotate: stage === 2 ? 180 : 0,
-          scale: stage === 2 ? 1.05 : 1,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 200,
-          damping: 20,
-          duration: 0.3,
-        }}
-      >
-        {stage === 2 ? (
-          <FaRegTimesCircle size={24} />
-        ) : (
-          <FaRegArrowAltCircleRight size={24} />
-        )}
-      </motion.div>
-    );
-  };
+const FocusCard = ({ card, stage, onClick }: SkillCardProps) => {
+  const Icon = card.icon;
+  const pane = (i: number) => ({
+    className: cn("pane block", i === stage && "cur"),
+    "aria-hidden": i !== stage,
+  });
 
   return (
-    <div
+    <button
+      type="button"
       onClick={onClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={{
-        borderBottomColor: card.hex,
-        filter: isHovered ? `drop-shadow(0 10px 10px ${card.hex}30)` : "none",
-        transition: "filter 0.3s ease",
-      }}
-      className="flex flex-col w-64 h-84 border-b-4 p-6 transition-all duration-300 hover:cursor-pointer bg-white"
+      className="fcard flex min-h-[440px] cursor-pointer flex-col gap-7 overflow-hidden px-8 pt-10 text-left select-none"
+      style={{ "--glow": card.glow } as CSSProperties}
     >
-      <div className="h-full">{renderStageContent()}</div>
-      <div className="flex w-full items-center justify-center">{getIcon()}</div>
-    </div>
+      <span className="flex w-full flex-auto flex-col justify-center gap-7">
+        <span className={cn("ico-wrap", stage !== 0 && "small")}>
+          <Icon />
+        </span>
+        <span className="panes block w-full">
+          <span {...pane(0)}>
+            <span className="block text-center text-[26px] leading-[1.15] font-bold tracking-[-.4px]">
+              {card.titleLines[0]}
+              <br />
+              {card.titleLines[1]}
+            </span>
+          </span>
+          <span {...pane(1)}>
+            <span className="block text-[15px] leading-[1.65] text-body">
+              {card.text}
+            </span>
+          </span>
+          <span {...pane(2)}>
+            {card.dotPoints.map((point) => (
+              <span
+                key={point}
+                className="flex gap-3 border-t border-line-soft py-2.5 text-[15px] leading-normal text-body"
+              >
+                <span
+                  className="mt-[9px] size-1.5 flex-none"
+                  style={{ background: card.dot }}
+                />
+                <span>{point}</span>
+              </span>
+            ))}
+          </span>
+        </span>
+      </span>
+
+      <span className="relative block size-8 self-center">
+        <ArrowCircle className={cn("ctl absolute inset-0", stage === 2 && "off")} />
+        <CloseCircle className={cn("ctl absolute inset-0", stage !== 2 && "off")} />
+      </span>
+      <span className="sr">
+        {card.titleLines.join(" ")}: {STAGE_ACTIONS[stage]}
+      </span>
+
+      <span
+        className="-mx-8 block h-[5px] w-[calc(100%+64px)]"
+        style={{ background: card.bar }}
+      />
+    </button>
   );
 };
 
 const SkillSection = () => {
-  const [cardStages, setCardStages] = useState<Record<string, number>>({
-    "1": 0,
-    "2": 0,
-    "3": 0,
-  });
+  const [cardStages, setCardStages] = useState<Record<string, number>>({});
 
   const handleCardClick = (cardId: string) => {
     setCardStages((prev) => ({
       ...prev,
-      [cardId]: prev[cardId] === 2 ? 0 : prev[cardId] + 1,
+      [cardId]: ((prev[cardId] ?? 0) + 1) % 3,
     }));
   };
 
   return (
-    <div className="flex flex-col items-center gap-10">
-      <div className="text-heading">FOCUS AREAS</div>
-      <div className="flex flex-wrap justify-center gap-8 max-w-6xl select-none">
-        {skillCardsData.map((card) => (
-          <SkillCard
-            key={card.id}
-            card={card}
-            stage={cardStages[card.id]}
-            onClick={() => handleCardClick(card.id)}
-          />
-        ))}
+    <section id="focus" className="section">
+      <div className="mx-auto max-w-[1240px]">
+        <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
+          <h2 className="h-pixel">Focus areas</h2>
+          <div className="eyebrow">Click a card to explore</div>
+        </div>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-5">
+          {skillCardsData.map((card) => (
+            <FocusCard
+              key={card.id}
+              card={card}
+              stage={cardStages[card.id] ?? 0}
+              onClick={() => handleCardClick(card.id)}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
