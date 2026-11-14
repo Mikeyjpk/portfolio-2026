@@ -108,6 +108,25 @@
   55% { transform: scaleY(1); transform-origin: bottom; }
   100% { transform: scaleY(0); transform-origin: bottom; }
 }
+/*
+ * Muttering the incantation: runs on the same 5s loop as the spell. He
+ * mutters (1.4s–1.9s), pauses ~0.6s, then the orb charges (50%) and the
+ * bolt flies (57%).
+ */
+@keyframes mutter-beard {
+  0%, 28%, 100% { transform: none; }
+  30.5% { transform: rotate(-2.5deg) translateY(1px); }
+  33% { transform: rotate(2deg); }
+  35.5% { transform: rotate(-1.5deg); }
+  38% { transform: none; }
+}
+@keyframes mutter-stache {
+  0%, 28%, 100% { transform: none; }
+  30.5% { transform: translateY(-1.5px) scaleX(1.04); }
+  33% { transform: translateY(0.5px); }
+  35.5% { transform: translateY(-1px) scaleX(1.03); }
+  38% { transform: none; }
+}
 @keyframes pix {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.15; }
@@ -117,10 +136,10 @@
   from { clip-path: inset(0 0 100% 0); transform: translateY(40px); }
   to { clip-path: inset(0 0 0 0); transform: none; }
 }
-@keyframes orbglow {
-  0%, 50% { fill: #d9772b; }
-  56% { fill: #ffe2c7; }
-  64%, 100% { fill: #d9772b; }
+@keyframes orbflash {
+  0%, 50% { opacity: 0; }
+  56% { opacity: 0.75; }
+  64%, 100% { opacity: 0; }
 }
 @keyframes bolt {
   0%, 56% { left: 0; opacity: 0; }
@@ -162,7 +181,20 @@
 .spin { animation: spin-cw 9s linear infinite; }
 .spinr { animation: spin-ccw 6s linear infinite; }
 .blink { animation: blink 4s infinite; }
-.orb { animation: orbglow 5s ease infinite; }
+/* 5s, in step with .bolt / .orb-flash (they mount together, so stay in phase). */
+.mutter-beard,
+.mutter-stache {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+  animation: mutter-beard 5s ease-in-out infinite;
+}
+.mutter-stache {
+  transform-origin: center;
+  animation-name: mutter-stache;
+}
+/* Swaps instantly as the charge flash (orb-flash) starts — the flash hides the cut. */
+.orb { fill: var(--spell, #d9772b); }
+.orb-flash { opacity: 0; animation: orbflash 5s ease infinite; }
 .bolt { animation: bolt 5s cubic-bezier(0.5, 0, 0.8, 0.6) infinite; }
 .impact { animation: impact 5s ease-out infinite; }
 .burst { opacity: 0; animation: burst 5s ease-out infinite; }
@@ -298,6 +330,19 @@
  * The 744px threshold is where the two columns (300px + 380px + 64px gap) wrap.
  */
 .contact-row { container-type: inline-size; }
+/*
+ * The spell changes as the orb charges (~2.3s into the 5s loop); the heading
+ * holds its old colour until the projectile lands (~3.55s), then takes the new one.
+ */
+.spell-text {
+  color: var(--spell, var(--color-orange));
+  transition: color 0.5s ease 1.25s;
+}
+/* Wizard's headband + sparkle: same timing as the heading (the staff orb doesn't wait). */
+.spell-fill {
+  fill: var(--spell, var(--color-orange));
+  transition: fill 0.5s ease 1.25s;
+}
 .spell { right: -56px; }
 @container (max-width: 743px) {
   .spell { right: calc(8px - clamp(20px, 5vw, 80px)); }
