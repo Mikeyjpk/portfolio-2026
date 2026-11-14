@@ -1,5 +1,24 @@
 import Navbar from "@/app/layout/components/Navbar";
 import Ufo from "@/components/illustrations/Ufo";
+import { cn } from "@/lib/utils";
+
+/**
+ * "Product Engineer" + skills subline. Rendered in two places: under the
+ * headline on mobile (< sm), and bottom-right from sm up.
+ *
+ * The inactive copy is hidden with `invisible absolute` rather than
+ * display:none — toggling display restarts the `rise` entrance animation, so
+ * the title would fade out and back in on every resize across the breakpoint.
+ * visibility:hidden also hides it from screen readers, so it's announced once.
+ */
+const RoleTitle = ({ className }: { className?: string }) => (
+  <div className={cn("rise", className)} style={{ animationDelay: "1.35s" }}>
+    <div className="text-base font-bold tracking-[3px]">Product Engineer</div>
+    <div className="mt-2 text-[11px] tracking-[3px] text-muted uppercase">
+      Full-stack · AI features · TypeScript &amp; React
+    </div>
+  </div>
+);
 
 const HeroSection = () => (
   <section className="screen flex items-stretch justify-center px-[clamp(12px,4vw,56px)] py-[clamp(12px,3vh,32px)]">
@@ -10,9 +29,9 @@ const HeroSection = () => (
       <Navbar className="rise" style={{ animationDelay: "1.1s" }} />
 
       {/*
-        < lg: UFO stacked above the headline, both centred.
-        lg+:  side by side on one row (never wraps). The headline is capped at
-              132px so it always fits beside the UFO inside the 1240px card.
+        < lg: UFO and headline stacked and centred (plus the role title on mobile).
+        lg+:  headline and UFO side by side on one row (never wraps). The
+              headline is capped at 132px so it always fits beside the UFO.
       */}
       <div className="flex min-h-0 flex-auto flex-col items-center justify-center gap-4 text-center lg:flex-row lg:justify-between lg:gap-10 lg:text-left">
         <h1
@@ -41,14 +60,10 @@ const HeroSection = () => (
         >
           <Ufo />
         </div>
+        <RoleTitle className="mt-2 sm:invisible sm:absolute" />
       </div>
 
-      {/*
-        wrap-reverse: on one row it's Scroll (left) / Product Engineer (right);
-        once it wraps, Product Engineer sits on top of Scroll. (items-start is
-        the bottom edge under wrap-reverse.)
-      */}
-      <div className="flex flex-wrap-reverse items-start justify-between gap-6">
+      <div className="flex items-end justify-between gap-6">
         <div
           className="rise flex items-center gap-4"
           style={{ animationDelay: "1.25s" }}
@@ -58,14 +73,7 @@ const HeroSection = () => (
           </div>
           <div className="eyebrow">Scroll · 2026</div>
         </div>
-        <div className="rise sm:ml-auto sm:text-right" style={{ animationDelay: "1.35s" }}>
-          <div className="text-base font-bold tracking-[3px]">
-            Product Engineer
-          </div>
-          <div className="mt-2 text-[11px] tracking-[3px] text-muted uppercase">
-            Full-stack · AI features · TypeScript &amp; React
-          </div>
-        </div>
+        <RoleTitle className="invisible absolute text-right sm:visible sm:static" />
       </div>
     </div>
   </section>

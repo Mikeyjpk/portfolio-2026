@@ -30,8 +30,10 @@
   a {
     color: var(--color-ink);
   }
-  a:hover {
-    color: var(--color-orange-deep);
+  @media (hover: hover) {
+    a:hover {
+      color: var(--color-orange-deep);
+    }
   }
 }
 
@@ -182,15 +184,25 @@
   transform-origin: right;
   transition: transform 0.4s;
 }
-.navlink:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
+/*
+ * Every :hover rule in this file sits inside @media (hover: hover). On touch
+ * screens a tap leaves the element "hovered" until you touch elsewhere, so
+ * glows/tints stayed stuck on as you scrolled past. Mouse/trackpad only.
+ * (Tailwind's own hover: variants already behave this way.)
+ */
+@media (hover: hover) {
+  .navlink:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
 }
 
 /* ---------- about accordion ---------- */
 /* Hover tints the whole row (title + open panel), not just the title button. */
 .about-row { transition: background 0.3s; }
-.about-row:hover { background: var(--color-wash); }
+@media (hover: hover) {
+  .about-row:hover { background: var(--color-wash); }
+}
 .chev { transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .chev.open { transform: rotate(45deg); }
 .acc {
@@ -221,11 +233,17 @@
 
 /* ---------- focus-area cards ---------- */
 .fcard { transition: box-shadow 0.5s ease; }
-.fcard:hover,
 .fcard:focus-visible {
   box-shadow:
     0 24px 60px -16px var(--glow),
     0 4px 18px -6px var(--glow);
+}
+@media (hover: hover) {
+  .fcard:hover {
+    box-shadow:
+      0 24px 60px -16px var(--glow),
+      0 4px 18px -6px var(--glow);
+  }
 }
 .fcard:focus-visible {
   outline: 2px solid var(--color-ink);
@@ -267,8 +285,10 @@
 .ctl { transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s; }
 .ctl.off { opacity: 0; transform: rotate(-90deg) scale(0.6); }
 .layer { transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
-.fcard:hover .l1 { transform: translateY(-10px); }
-.fcard:hover .l3 { transform: translateY(10px); }
+@media (hover: hover) {
+  .fcard:hover .l1 { transform: translateY(-10px); }
+  .fcard:hover .l3 { transform: translateY(10px); }
+}
 
 /* ---------- contact spell ---------- */
 /*
@@ -294,9 +314,11 @@
   border-left-width: 6px;
 }
 .osend { transition: background 0.3s; }
-.osend:hover:not(:disabled) { background: var(--color-orange); }
 .osend .tri { transition: transform 0.3s; }
-.osend:hover:not(:disabled) .tri { transform: translateX(4px); }
+@media (hover: hover) {
+  .osend:hover:not(:disabled) { background: var(--color-orange); }
+  .osend:hover:not(:disabled) .tri { transform: translateX(4px); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *,
