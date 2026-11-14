@@ -43,7 +43,12 @@ const HeroSection = () => (
         </div>
       </div>
 
-      <div className="flex flex-wrap items-end justify-between gap-6">
+      {/*
+        wrap-reverse: on one row it's Scroll (left) / Product Engineer (right);
+        once it wraps, Product Engineer sits on top of Scroll. (items-start is
+        the bottom edge under wrap-reverse.)
+      */}
+      <div className="flex flex-wrap-reverse items-start justify-between gap-6">
         <div
           className="rise flex items-center gap-4"
           style={{ animationDelay: "1.25s" }}

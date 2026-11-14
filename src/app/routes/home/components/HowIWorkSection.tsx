@@ -51,7 +51,8 @@ const HowIWorkSection = () => (
                   {step.title}
                 </h3>
               </div>
-              <p className="mt-4 max-w-[340px] text-[15px] leading-relaxed text-[#cfcbc2]">
+              {/* Mobile: indented to line up under the title text, past the step number. */}
+              <p className="mt-4 max-w-[340px] pl-8 text-[15px] leading-relaxed text-[#cfcbc2] md:pl-0">
                 {step.text}
               </p>
             </div>

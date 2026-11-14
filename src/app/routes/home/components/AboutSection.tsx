@@ -34,10 +34,20 @@ const AboutRow = ({
   const buttonId = `${id}-btn`;
   const panelId = `${id}-panel`;
 
+  // The whole row is the click target (matching its hover tint). Clicks on the
+  // title button bubble up here too, so the button has no handler of its own —
+  // it stays a real <button> for keyboard (Enter/Space) and screen readers.
+  const handleRowClick = () => {
+    // Don't collapse the panel when the user is just selecting text in it.
+    if (window.getSelection()?.toString()) return;
+    onToggle();
+  };
+
   return (
     <div
+      onClick={handleRowClick}
       className={cn(
-        "border-t-[1.5px] border-ink",
+        "about-row cursor-pointer border-t-[1.5px] border-ink",
         last && "border-b-[1.5px]"
       )}
     >
@@ -45,10 +55,9 @@ const AboutRow = ({
         <button
           id={buttonId}
           type="button"
-          className="row-btn flex min-h-11 w-full cursor-pointer items-center gap-6 px-2 py-7 text-left"
+          className="flex min-h-11 w-full cursor-pointer items-center gap-6 px-2 py-7 text-left"
           aria-expanded={open}
           aria-controls={panelId}
-          onClick={onToggle}
         >
           <span className={cn("font-pixel text-sm", numClassName)}>{num}</span>
           <span className="flex-1 text-2xl font-semibold tracking-[-.3px]">
@@ -141,8 +150,10 @@ const AboutSection = () => {
                 data into something customers can act on.
               </p>
               <p>
-                Outside work, I make games, which gives me an excuse to try
-                tools I wouldn’t use at my day job.
+                Outside work, I love making things. I’ve written and produced
+                music, including with a band signed to Greyscale Records. I
+                also write stories, build small projects around the house, and
+                I’m learning game development.
               </p>
             </div>
           </AboutRow>

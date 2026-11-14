@@ -93,7 +93,7 @@ interface SkillCardProps {
 const FocusCard = ({ card, stage, onClick }: SkillCardProps) => {
   const Icon = card.icon;
   const pane = (i: number) => ({
-    className: cn("pane block", i === stage && "cur"),
+    className: cn("pane block", i === 0 && "p-title", i === stage && "cur"),
     "aria-hidden": i !== stage,
   });
 
@@ -101,10 +101,13 @@ const FocusCard = ({ card, stage, onClick }: SkillCardProps) => {
     <button
       type="button"
       onClick={onClick}
-      className="fcard flex min-h-[440px] cursor-pointer flex-col gap-7 overflow-hidden px-8 pt-10 text-left select-none"
+      // min-height only matters when cards sit side by side (keeps a row level);
+      // in the single-column mobile layout it just left a big empty gap.
+      className="fcard flex cursor-pointer flex-col gap-6 overflow-hidden px-6 pt-8 text-left select-none sm:min-h-[440px] sm:gap-7 sm:px-8 sm:pt-10"
       style={{ "--glow": card.glow } as CSSProperties}
     >
-      <span className="flex w-full flex-auto flex-col justify-center gap-7">
+      {/* Top-aligned so icons and titles line up across cards, whatever each card's text height. */}
+      <span className="flex w-full flex-auto flex-col justify-start gap-5 sm:pt-6">
         <span className={cn("ico-wrap", stage !== 0 && "small")}>
           <Icon />
         </span>
@@ -147,7 +150,7 @@ const FocusCard = ({ card, stage, onClick }: SkillCardProps) => {
       </span>
 
       <span
-        className="-mx-8 block h-[5px] w-[calc(100%+64px)]"
+        className="-mx-6 block h-[5px] w-[calc(100%+48px)] sm:-mx-8 sm:w-[calc(100%+64px)]"
         style={{ background: card.bar }}
       />
     </button>
@@ -167,7 +170,8 @@ const SkillSection = () => {
   return (
     <section id="focus" className="section">
       <div className="mx-auto max-w-[1240px]">
-        <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
+        {/* Centred below lg to match the hero and contact headings; split left/right on desktop. */}
+        <div className="mb-12 flex flex-col items-center gap-4 text-center lg:flex-row lg:items-end lg:justify-between lg:text-left">
           <h2 className="h-pixel">Focus areas</h2>
           <div className="eyebrow">Click a card to explore</div>
         </div>

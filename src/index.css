@@ -188,8 +188,9 @@
 }
 
 /* ---------- about accordion ---------- */
-.row-btn { transition: background 0.3s; }
-.row-btn:hover { background: var(--color-wash); }
+/* Hover tints the whole row (title + open panel), not just the title button. */
+.about-row { transition: background 0.3s; }
+.about-row:hover { background: var(--color-wash); }
 .chev { transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .chev.open { transform: rotate(45deg); }
 .acc {
@@ -256,6 +257,8 @@
   pointer-events: none;
   transition: opacity 0.25s ease;
 }
+/* Title pane hugs the icon instead of centring in the reserved height. */
+.pane.p-title { align-self: start; }
 .pane.cur {
   opacity: 1;
   pointer-events: auto;
@@ -278,6 +281,8 @@
 .spell { right: -56px; }
 @container (max-width: 743px) {
   .spell { right: calc(8px - clamp(20px, 5vw, 80px)); }
+  /* Form stacked under the wizard: Send sits on the right. */
+  .osend { align-self: flex-end; }
 }
 
 /* ---------- contact form ---------- */
